@@ -1,0 +1,91 @@
+<!-- <h2>Task List</h2>
+<ul>
+  <li *ngFor="let task of tasks">
+    <h3>{{ task.title }}</h3>
+    <p>{{ task.description }}</p>
+    <button (click)="deleteTask(task.id)">Delete</button>
+    <button>Edit</button>
+  </li>
+</ul> -->
+
+<!-- main container -->
+<div class="conatiner">
+<!-- inside content box -->
+  <div class="box">
+    <div class="header">
+      <!-- png image container -->
+      <div class="img-box">
+        <img src="assets/task.png" alt="">
+      </div>
+     
+      <!-- task count container -->
+      <div class="task-count">
+        <p>records</p>
+      </div>
+
+      <div class="task-heading">
+        <div class="tasks">Tasks</div>
+        <div class="all-tasks">All Tasks</div>
+      </div>
+
+      <div class="buttons">
+        <button (click)="openNewTaskDialog()">New Task</button>
+        <button>Refersh</button>
+        <div class="search-box">
+          <input type="search" class="search-bar" placeholder="Search..." >
+          <img src="assets/icons/search.png" alt="search-icon">
+        </div>
+        
+      </div>
+    </div>
+
+
+   <div class="task-table-container">
+    <div *ngIf="isLoading">Loading tasks...</div>
+    <div *ngIf="!isLoading && tasks.length === 0">No tasks found.</div>
+    <table class="task-table" *ngIf="!isLoading && tasks.length > 0">
+      <thead>
+        <tr>
+          <th><input type="checkbox" /></th>
+          <th>Assigned To</th>
+          <th>Status</th>
+          <th>Due Date</th>
+          <th>Priority</th>
+          <th>Comments</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- pipe for pagination -->
+        <tr *ngFor="let task of tasks | paginate : {itemsPerPage : count,currentPage:p}" >
+          <td><input type="checkbox" /></td>
+          <td>{{ task.assignedTo }}</td>
+          <td>{{ task.status }}</td>
+          <td>{{ task.dueDate | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ task.priority }}</td>
+          <td>
+            {{ task.description }}
+
+            <span class="dropdown">
+              <button class="dropdown-toggle" (click)="toggleDropdown(task.id, $event)">▼</button>
+              <div
+                class="dropdown-menu"
+                [class.show]="activeDropdown === task.id">
+                <button (click)="openEditDialog(task.id,task.status,task.dueDate,task.priority,task.description )" class="dropdown-options-btn">Edit</button> 
+                <button (click)="openDeleteDialog(task.description,task.id)" class="dropdown-options-btn">Delete</button>
+              </div>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <!-- paginator -->
+  <div class="paginator-controller">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+   
+  </div>
+  
+    
+</div>

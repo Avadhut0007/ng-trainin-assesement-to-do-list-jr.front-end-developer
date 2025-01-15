@@ -1,0 +1,65 @@
+/* Container styling */
+.delete-dialog-container {
+    width: 400px;
+    overflow: hidden;
+  }
+  
+  /* Header styling */
+  .dialog-header {
+    background-color: #d9534f;
+    padding: 16px;
+    text-align: center;
+    color: white;
+  }
+  
+  .dialog-header h2 {
+    margin: 0;
+    font-size: 1.5em;
+  }
+  
+  /* Body styling */
+  .dialog-body {
+    padding: 16px;
+    font-size: 1em;
+    color: #333;
+  }
+  
+  .dialog-body p {
+    margin: 0;
+  }
+  
+  /* Actions styling */
+  .dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 16px;
+  }
+  
+  .cancel-button,
+  .confirm-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+  }
+
+  .dialog-footer{
+    display: flex; justify-content: 
+    flex-end; 
+    padding: 16px; gap: 10px;
+  }
+
+  .dialog-footer #button-no{
+    background-color: #b0b0b0; 
+    color: white;
+  }
+
+  .dialog-footer #button-yes{
+    background-color: rgb(241, 241, 76); 
+    color: white;
+  }
+  
+
+  

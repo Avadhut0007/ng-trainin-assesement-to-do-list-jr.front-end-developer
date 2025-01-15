@@ -1,0 +1,116 @@
+<div class="dialog-container">
+  <div class="head">
+    <h2>{{ isEditMode ? 'Edit Task' : 'New Task' }}</h2>
+  </div>
+  <hr />
+  <div class="form">
+    <form #taskForm="ngForm">
+      <div class="form-row">
+        <!-- Assigned To Dropdown -->
+        <div class="form-group">
+          <span class="required">*</span>
+          <label>Assigned To</label>
+          <select 
+            name="assignedTo" 
+            [(ngModel)]="taskFormData.assignedTo" 
+            required
+            #assignedTo="ngModel"
+          >
+            <option *ngFor="let option of assignedToOptions" [value]="option">
+              {{ option }}
+            </option>
+          </select>
+          <div *ngIf="assignedTo.invalid && assignedTo.touched" class="error-message">
+            Assigned To is required.
+          </div>
+        </div>
+
+        <!-- Status Dropdown -->
+        <div class="form-group">
+          <span class="required">*</span>
+          <label>Status</label>
+          <select 
+            name="status" 
+            [(ngModel)]="taskFormData.status" 
+            required
+            #status="ngModel"
+          >
+            <option *ngFor="let status of statusOptions" [value]="status">
+              {{ status }}
+            </option>
+          </select>
+          <div *ngIf="status.invalid && status.touched" class="error-message">
+            Status is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Due Date</label>
+          <input 
+            type="date" 
+            name="dueDate" 
+            [(ngModel)]="taskFormData.dueDate" 
+            #dueDate="ngModel"
+          />
+          <div *ngIf="dueDate.invalid && dueDate.touched" class="error-message">
+            Please provide a valid due date.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="required">*</span>
+          <label>Priority</label>
+          <select 
+            name="priority" 
+            [(ngModel)]="taskFormData.priority" 
+            required
+            #priority="ngModel"
+          >
+            <option value="low">Low</option>
+            <option value="normal">Normal</option>
+            <option value="high">High</option>
+          </select>
+          <div *ngIf="priority.invalid && priority.touched" class="error-message">
+            Priority is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group full-width">
+        <label>Description</label>
+        <textarea
+          rows="4"
+          name="description"
+          [(ngModel)]="taskFormData.description"
+          placeholder="Enter description here..."
+          #description="ngModel"
+          minlength="5"
+          maxlength="500"
+        ></textarea>
+        <div *ngIf="description.invalid && description.touched" class="error-message">
+          Description is required (min 5 characters).
+        </div>
+        <div *ngIf="description.errors && description.touched" class="error-message">
+          Description should not exceed 500 characters.
+        </div>
+      </div>
+
+      <div *ngIf="taskForm.invalid" class="error-message">
+        Please fill all required fields correctly before submitting.
+      </div>
+    </form>
+  </div>
+  <hr />
+  <div class="actions">
+    <button class="cancel-button" (click)="closeDialog()">Cancel</button>
+    <button 
+      class="save-button" 
+      (click)="saveTaskData()" 
+      [disabled]="taskForm.invalid"
+    >
+      {{ isEditMode ? 'Update' : 'Save' }}
+    </button>
+  </div>
+</div>

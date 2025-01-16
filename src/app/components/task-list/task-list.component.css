@@ -90,15 +90,6 @@
     width: 30%;
  }
 
- /* .paginator {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 16px;
-    background-color: antiquewhite;
-    height: 10%;
-    
-  } */
 
   .task-table-container {
     background-color: white;
@@ -187,6 +178,7 @@
     display: flex;
     justify-content: right;
     align-items: end;
+    /* position: fixed; */
   }
 
   /* Media Queries for Mobile and Tablet Devices */

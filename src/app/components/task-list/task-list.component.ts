@@ -12,8 +12,8 @@ import { DeleteTaskComponent } from '../delete-task/delete-task.component';
 })
 export class TaskListComponent implements OnInit{
 
-  p : number =1;
-  count  : number =5;
+  p : number = 1;
+  count : number = 5;
   
   tasks: any[] = [];
   isLoading = true;
@@ -24,11 +24,13 @@ export class TaskListComponent implements OnInit{
 
   activeDropdown: number | null = null;
 
+  //for dropdown menu
   toggleDropdown(taskId: number, event: MouseEvent): void {
     event.stopPropagation(); // Prevent closing when clicking inside
     this.activeDropdown = this.activeDropdown === taskId ? null : taskId;
   }
 
+  //drop down host listner
   @HostListener('document:click', ['$event'])
   closeDropdown(event: Event): void {
     const target = event.target as HTMLElement;
@@ -37,10 +39,12 @@ export class TaskListComponent implements OnInit{
     }
   }
 
+  //onInit method to load all the data at starting of the application
   ngOnInit(): void {
     this.loadTasks();
   }
 
+  //load task method to loading all the tasks which comes from the backend
   loadTasks(): void {
     this.taskService.getAllTasks().subscribe(
       (data) => {
@@ -54,10 +58,7 @@ export class TaskListComponent implements OnInit{
     );
   }
 
-  editTask(_t40: any) {
-    throw new Error('Method not implemented.');
-    }
-
+//new task dialog for opening the dialog box
   openNewTaskDialog(): void {
     this.dialog.open(NewTaskComponent, {
       width: '50%', // Set width for the dialog
@@ -66,8 +67,7 @@ export class TaskListComponent implements OnInit{
     });
   }
 
-  
-
+  //for deleteing the tasks 
   openDeleteDialog(taskName: string,taskId: number): void {
     const dialogRef = this.dialog.open(DeleteTaskComponent, {
       width: '600px',
@@ -89,6 +89,7 @@ export class TaskListComponent implements OnInit{
     });
   }
 
+  //for updating the task
   openEditDialog(taskId: number, taskStatus: string, taskDueDate: Date, priority: string, taskName: string): void {
     const dialogRef = this.dialog.open(NewTaskComponent, {
       width: '700px',
@@ -107,13 +108,13 @@ export class TaskListComponent implements OnInit{
         const updatedTask = {
           id: result.taskId,
           status: result.taskStatus,
-          dueDate: result.taskDueDate,  // Correcting the 'date' to 'dueDate' for consistency
+          dueDate: result.taskDueDate,  
           priority: result.priority,
           name: result.taskName,
           description: result.taskDescription
         };
   
-        // Call the update API with the updated task data
+        // Calling the update API with the updated task data
         this.taskService.updateTask(updatedTask).subscribe(
           () => {
             // Update the task in the local list

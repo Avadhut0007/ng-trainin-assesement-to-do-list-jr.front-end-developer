@@ -20,6 +20,7 @@
               {{ option }}
             </option>
           </select>
+          <!-- validation -->
           <div *ngIf="assignedTo.invalid && assignedTo.touched" class="error-message">
             Assigned To is required.
           </div>
@@ -104,7 +105,9 @@
   </div>
   <hr />
   <div class="actions">
+    <!-- buttond for close the dialog -->
     <button class="cancel-button" (click)="closeDialog()">Cancel</button>
+    <!-- button for saving the data -->
     <button 
       class="save-button" 
       (click)="saveTaskData()" 

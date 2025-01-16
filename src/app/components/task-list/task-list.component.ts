@@ -3,7 +3,7 @@ import { TaskService } from '../../services/task.service';
 import { MatDialog } from '@angular/material/dialog';
 import { NewTaskComponent } from '../new-task/new-task.component';
 import { DeleteTaskComponent } from '../delete-task/delete-task.component';
-import { EditTaskComponent } from '../edit-task/edit-task.component';
+
 
 @Component({
   selector: 'app-task-list',
